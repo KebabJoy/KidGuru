@@ -10,8 +10,8 @@ const mapGamesId = require('./menu');
 const PORT = process.env.PORT || 3000 // port that the server is running on => localhost:3000
 app.use(bodyParser.json()) // telling the app that we are going to use json to handle incoming payload
 app.use(cors());
-//const  {genNextTask} = require ('./math_guru')
-const  task = require ('./math_guru')
+
+const MathGuru = require ('./math_guru')
 function success(res, payload) {
   return res.status(200).json(payload);
 }
@@ -23,14 +23,15 @@ app.get("/main_page", async (req, res, next) => {
     next({ status: 400, message: "failed to get menu" })
   }
 })
-let i=0
+
 app.get("/math_guru", async (req, res, next) => {
-  //res.json(task) 
-  i++
-  console.log(task(i))
   try {
-   
-    return success(res, task(i))
+    if(req.query.next > 0){
+      console.log(MathGuru.genNextTask())
+      MathGuru.genNextTask()
+    }
+
+    return success(res, MathGuru.genNextTask())
   } catch(err) {
     next({ status: 400, message: "failed to get the game" })
   }

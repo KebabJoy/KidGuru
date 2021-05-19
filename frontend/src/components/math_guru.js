@@ -3,8 +3,12 @@ import { render } from 'react-dom';
 import { ApiHelper } from '../APIHelper'
 
 
-export function MathGuru () {
-    return(
-        <div>{ApiHelper.getMathGuru}</div>
-    )
-}
+export async function genNextTask(){
+    let response= await fetch('http://localhost:3000/math_guru')
+    let data= await response.json()
+    console.log(data)
+    return data
+   // useEffect(()=>{data})
+  }
+
+export default {genNextTask}

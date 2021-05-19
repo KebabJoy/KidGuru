@@ -1,6 +1,4 @@
 
-function all(i){
-
   const operators = ['*', '+', '-']
   let args = []
   let operator
@@ -15,6 +13,9 @@ function all(i){
   }
   
   function genResult(){
+    while(args.length > 0) {
+      args.pop();
+    }
     switch(operator){
       case operators[0]:
         args.push(genNum(10, 2));
@@ -34,21 +35,24 @@ function all(i){
   function genNextTask(){
     genOperator()
     genResult()
-   // task.task_num++
-  }
-  
-
-  genNextTask()
-  const task = {
+    return{
       operator: operator, 
       result: genResult(),
       first_arg: args[0],
       second_arg: args[1],
-     // task_num: (i)=>{return i++}
-     task_num: i
-      
+      task_num: 0      
+    }
   }
-  return task
-}
+  
 
-module.exports = all
+  genNextTask()
+  // let task = {
+  //     operator: operator, 
+  //     result: genResult(),
+  //     first_arg: args[0],
+  //     second_arg: args[1],
+  //     task_num: 0      
+  // }
+
+
+module.exports = {genNextTask}

@@ -4,34 +4,55 @@ import React, { useEffect, useState } from 'react';
 import { darkSber } from '@sberdevices/plasma-tokens/themes';
 import { Button } from '@sberdevices/ui/components/Button/Button';
 import { Container } from '@sberdevices/plasma-ui/components/Grid';
-import { Image } from '@sberdevices/ui/components/Image/Image';
-import Scene from '../components/menu'
-//import  {genNextTask} from '../math_guru_logic/math_guru'
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 
-const Page0 = () =>{
- 
-  async function genNextTask(){
-    let response= await fetch('http://localhost:3000/math_guru')
-    let data= await response.json()
-    console.log(data)
-   // useEffect(()=>{data})
-  }
-  return(
-  <>
+let currentId = 0;
+
+function Page0() {
+  const [items, setItems] = useState([]);
+
+    const fetchedData = async (id) => {
+        return await ApiHelper.getMathGuru(id);
+    }
     
-    <Container>
-      
-      <Button onClick={genNextTask}>next task</Button>
-           <div>
-             {}
-             </div>
-             
-    </Container>
+    useEffect(() => {
+        fetchedData(currentId).then((response) => {
+            console.log(response.data);
+            const  data  = response.data;
+            setItems(data);
+        })
+    }, []);
 
+    const moveTo = (nextId) => () =>  {
+        fetchedData(nextId).then((response) => {
+            const data  = response.data;
+            setItems(data);
+        })
+    }    
 
+  const reload = () => {
+    window.location.reload();
+  }
 
+  return (
+    <>
+      <Container styles={darkSber}>
+        
+        {items.first_arg} {items.operator} {items.second_arg} = ?
+
+        <Button onClick={moveTo(1)}>SUBMIT</Button>
+
+        <Button><Link to='/'>BACK</Link></Button>
+      </Container>
     </>
-    )
+  );
 }
+
+
 
 export default Page0
