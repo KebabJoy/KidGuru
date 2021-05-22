@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@sberdevices/assistant-client": "^2.15.1",
     "@sberdevices/plasma-icons": "^1.6.0",
     "@sberdevices/plasma-tokens": "^1.2.0",
     "@sberdevices/plasma-ui": "^1.9.0",
@@ -12,6 +13,7 @@
     "@testing-library/user-event": "^12.8.3",
     "axios": "^0.21.1",
     "cores": "^0.8.5",
+    "number-to-words-ru": "^2.3.1",
     "react": "^17.0.2",
     "react-cache": "^2.0.0-alpha.1",
     "react-dom": "^17.0.2",

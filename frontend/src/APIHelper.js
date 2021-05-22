@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:3000"
+const API_URL = "https://kidgurufinal.herokuapp.com"
 
 async function getMenu(){
     const obj = await axios.get(`${API_URL}/main_page`)
@@ -12,4 +12,10 @@ async function getMathGuru(nextt){
     return obj
 }
 
-export default { getMenu, getMathGuru };
+async function getAnimal(aid){
+    const obj = await axios.get(`${API_URL}/g_animal`, {params: {id: aid}})
+    return obj
+}
+
+
+export default { getMenu, getMathGuru, getAnimal };

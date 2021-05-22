@@ -11,12 +11,15 @@ import {
     Route,
     Link
   } from "react-router-dom";
-  import { genNextTask } from '../components/math_guru'
 
 
+const MainPage = ({dispatch}) =>{
 
+    useEffect(() => {
+        dispatch({type: "redirect", redirect: 0})
+        
+      }, []);
 
-const MainPage = () =>{
     return(
         <Container>
             <Button><Link to='/math_guru'>Math Guru</Link></Button>
